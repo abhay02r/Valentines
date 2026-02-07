@@ -238,21 +238,24 @@
     const mosaic = document.getElementById("mosaic");
 
     function buildMosaic() {
-      mosaic.innerHTML = "";
+  mosaic.innerHTML = "";
 
-      const tileSize = window.innerWidth <= 420 ? 90 : 110;
-      const gap = 10;
-      const cols = Math.max(1, Math.floor((window.innerWidth - 28) / (tileSize + gap)));
-      const rows = Math.max(1, Math.floor((window.innerHeight - 28) / (tileSize + gap)));
-      const count = cols * rows;
+  const tileSize = window.innerWidth <= 420 ? 90 : 110;
+  const gap = 10;
+  const cols = Math.max(1, Math.floor((window.innerWidth - 28) / (tileSize + gap)));
+  const rows = Math.max(1, Math.floor((window.innerHeight - 28) / (tileSize + gap)));
+  const count = cols * rows;
 
-      for (let i = 0; i < count; i++) {
-        const img = document.createElement("img");
-        img.src = images[i % images.length]; 
-        img.alt = "memory";
-        mosaic.appendChild(img);
-      }
-    }
+  for (let i = 0; i < count; i++) {
+    const img = document.createElement("img");
+
+    const randomIndex = Math.floor(Math.random() * images.length);
+    img.src = images[randomIndex];
+
+    img.alt = "memory";
+    mosaic.appendChild(img);
+  }
+}
 
     buildMosaic();
     window.addEventListener("resize", buildMosaic);
@@ -326,6 +329,7 @@ function sayYes() {
   startEmojiSprout(120);   
   setTimeout(() => startEmojiSprout(220), 4500); 
 }
+setInterval(buildMosaic, 4000);
 
   </script>
 </body>
